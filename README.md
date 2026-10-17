@@ -1,55 +1,118 @@
-
 # E-commerce QA Automation Framework
 
 ## Overview
-A Java-based UI automation project for testing the SauceDemo practice
-e-commerce application using Selenium WebDriver, TestNG and Maven.
+
+A Java-based test automation framework for validating an e-commerce practice application using Selenium WebDriver, TestNG, Maven, and REST Assured.
+
+The project demonstrates UI automation, API validation, negative testing, reusable page objects, assertions, test reporting, and version control.
 
 ## Technology Stack
-- Java 21
-- Selenium WebDriver
-- TestNG
-- Maven
-- Git
 
-## Current Test Coverage
-- Application page-title verification
-- Successful login
-- Invalid-password error handling
-- Adding a product to the shopping cart
+- **Language:** Java 21
+- **UI automation:** Selenium WebDriver
+- **Test framework:** TestNG
+- **API automation:** REST Assured
+- **Build and dependency management:** Maven
+- **Version control:** Git
+- **Test reporting:** Maven Surefire / TestNG reports
+
+## Test Coverage
+
+### UI Automation — SauceDemo
+
+- Verify application page title.
+- Verify successful login.
+- Verify invalid login error handling.
+- Add a product to the shopping cart.
+- Complete the checkout process.
+- Verify checkout validation when the first name is missing.
+
+### API Automation — JSONPlaceholder
+
+- Verify a successful GET request returns HTTP 200.
+- Validate expected JSON response fields.
+- Verify a request for a nonexistent post returns HTTP 404.
+
+## Project Structure
+
+```text
+ecommerce-qa-automation/
+├── pom.xml
+├── README.md
+└── src/
+    └── test/
+        └── java/
+            ├── pages/
+            │   ├── LoginPage.java
+            │   ├── InventoryPage.java
+            │   ├── CartPage.java
+            │   └── CheckoutPage.java
+            └── tests/
+                ├── FirstBrowserTest.java
+                ├── LoginTest.java
+                ├── InvalidLoginTest.java
+                ├── CartTest.java
+                ├── CheckoutTest.java
+                ├── CheckoutValidationTest.java
+                └── ApiTest.java
+```
 
 ## Prerequisites
+
 - Java JDK 21
-- Maven
+- Apache Maven
 - Google Chrome or a compatible Chromium browser
-- Internet access to reach the practice application
+- Internet access to the practice application and sample API
 
 ## Run the Tests
-Clone or download the project, navigate to its root directory, then run:
+
+Run the complete test suite from the project root:
 
 ```bash
-mvn test
+mvn clean test
+```
+
+Run the API tests only:
+
+```bash
+mvn -Dtest=ApiTest test
 ```
 
 ## Test Reports
-Maven Surefire generates reports in:
+
+After execution, Maven Surefire generates reports in:
 
 `target/surefire-reports/`
 
-Open `index.html` in a browser for the available TestNG report.
+Open `index.html` in a browser to review the available TestNG report.
 
-## Design
-The project uses Page Object Model (POM) to separate page interactions
-from test assertions.
+## Design Approach
+
+The UI tests use the **Page Object Model (POM)** to separate page interactions from test assertions. Explicit waits are used where appropriate to improve synchronization with browser elements.
+
+The API tests use REST Assured and TestNG assertions to validate HTTP responses and JSON data.
+
+## Current Results
+
+The latest recorded test run completed with:
+
+- Tests run: 8
+- Failures: 0
+- Errors: 0
+- Skipped: 0
+
+Results may vary with browser, network, and external service availability.
 
 ## Limitations
-This project currently tests a public practice application.
-It does not establish the reliability, security or performance of a
-production e-commerce system.
 
-## Future Improvements
-- Expand product, cart and checkout coverage
-- Add API testing
-- Improve test data management
-- Integrate automated execution with Jenkins
-- Publish repeatable test reports
+- SauceDemo is a practice application, not a production e-commerce system.
+- JSONPlaceholder is a sample API, not the backend of SauceDemo.
+- These tests do not establish production security, load handling, or performance.
+- The tests require network access to their external targets.
+
+## Planned Improvements
+
+- Add more API test scenarios and response validation.
+- Improve test data management.
+- Configure automated execution through a CI/CD pipeline.
+- Publish the project repository with clear setup instructions and test evidence.
