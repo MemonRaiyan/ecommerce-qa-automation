@@ -26,6 +26,8 @@ public class CartPage {
                 By.className("shopping_cart_link")
             )
         ).click();
+
+        wait.until(ExpectedConditions.urlContains("cart.html"));
     }
 
     public void checkout() {

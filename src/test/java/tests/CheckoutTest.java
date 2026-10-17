@@ -4,6 +4,9 @@ package tests;
 import utils.DriverFactory;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,6 +25,12 @@ public class CheckoutTest {
             LoginPage loginPage = new LoginPage(driver);
             loginPage.open();
             loginPage.login("standard_user", "secret_sauce");
+
+            WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(15));
+            wait.until(
+                ExpectedConditions.urlContains("inventory.html")
+            );
 
             InventoryPage inventoryPage = new InventoryPage(driver);
             inventoryPage.addBackpackToCart();
