@@ -1,9 +1,10 @@
 
 package tests;
 
+import utils.DriverFactory;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,7 +17,7 @@ public class InvalidLoginTest {
 
     @Test
     public void invalidPasswordShowsError() {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = DriverFactory.createDriver();
 
         try {
             LoginPage loginPage = new LoginPage(driver);
