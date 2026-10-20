@@ -26,11 +26,13 @@ jobs:
       - name: Run UI and API tests
         run: mvn --batch-mode clean test
 
-      - name: Upload test reports
+      - name: Upload test reports and failure screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: qa-test-reports
-          path: target/surefire-reports/
+          path: |
+            target/surefire-reports/
+            target/failure-screenshots/
           if-no-files-found: warn
           retention-days: 14

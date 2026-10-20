@@ -2,6 +2,7 @@
 package tests;
 
 import utils.DriverFactory;
+import utils.FailureScreenshot;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -26,6 +27,9 @@ public class FirstBrowserTest {
 
             System.out.println("Actual page title: " + actualTitle);
 
+        } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(driver, "FirstBrowserTest");
+            throw e;
         } finally {
             driver.quit();
         }

@@ -2,6 +2,7 @@
 package tests;
 
 import utils.DriverFactory;
+import utils.FailureScreenshot;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,6 +55,9 @@ public class CartTest {
 
             System.out.println("PASS: Backpack was added to the cart.");
 
+        } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(driver, "CartTest");
+            throw e;
         } finally {
             driver.quit();
         }

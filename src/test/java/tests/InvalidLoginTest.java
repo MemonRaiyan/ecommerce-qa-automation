@@ -2,6 +2,7 @@
 package tests;
 
 import utils.DriverFactory;
+import utils.FailureScreenshot;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -42,6 +43,9 @@ public class InvalidLoginTest {
 
             System.out.println("PASS: Invalid login displays the expected error.");
 
+        } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(driver, "InvalidLoginTest");
+            throw e;
         } finally {
             driver.quit();
         }

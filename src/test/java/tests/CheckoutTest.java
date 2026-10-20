@@ -2,7 +2,7 @@
 package tests;
 
 import utils.DriverFactory;
-
+import utils.FailureScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -57,9 +57,15 @@ public class CheckoutTest {
             );
 
             System.out.println("PASS: Checkout completed successfully.");
-
+                         } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(
+                driver,
+                "CheckoutTest-userCanCompleteCheckout"
+            );
+            throw e;
         } finally {
             driver.quit();
         }
+
     }
 }

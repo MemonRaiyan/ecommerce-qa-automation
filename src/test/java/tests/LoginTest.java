@@ -2,6 +2,7 @@
 package tests;
 
 import utils.DriverFactory;
+import utils.FailureScreenshot;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +44,9 @@ public class LoginTest {
 
             System.out.println("PASS: POM login test succeeded.");
 
+        } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(driver, "LoginTest");
+            throw e;
         } finally {
             driver.quit();
         }

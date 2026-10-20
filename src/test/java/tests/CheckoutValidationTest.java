@@ -1,6 +1,7 @@
 package tests;
 
 import utils.DriverFactory;
+import utils.FailureScreenshot;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,6 +55,9 @@ public class CheckoutValidationTest {
                 "PASS: Missing first name is rejected."
             );
 
+        } catch (AssertionError | RuntimeException e) {
+            FailureScreenshot.capture(driver, "CheckoutValidationTest");
+            throw e;
         } finally {
             driver.quit();
         }
