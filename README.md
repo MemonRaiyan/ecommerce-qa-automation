@@ -78,13 +78,42 @@ Run the API tests only:
 mvn -Dtest=ApiTest test
 ```
 
+
 ## Test Reports
 
-After execution, Maven Surefire generates reports in:
+After running the tests, Maven Surefire and TestNG generate reports in:
 
 `target/surefire-reports/`
 
-Open `index.html` in a browser to review the available TestNG report.
+Open the HTML report locally:
+
+```bash
+xdg-open target/surefire-reports/index.html
+```
+
+You can also inspect `emailable-report.html` for a compact report.
+
+## Continuous Integration
+
+GitHub Actions automatically runs the UI and API tests when changes are pushed to `main` or when a pull request targets `main`. The workflow can also be started manually.
+
+Workflow file: `.github/workflows/qa-tests.yml`
+
+The workflow:
+
+1. Checks out the repository.
+2. Sets up Java 21 and Maven dependency caching.
+3. Runs `mvn --batch-mode clean test`.
+4. Uploads the Surefire report directory as the `qa-test-reports` artifact, retaining it for 14 days.
+
+To access a CI report:
+
+1. Open the repository's **Actions** tab.
+2. Select a completed workflow run.
+3. Download `qa-test-reports` under **Artifacts**.
+4. Extract the archive and open `index.html` in a browser.
+
+A successful local run does not guarantee a successful CI run; check the workflow result and logs independently.
 
 ## Design Approach
 
