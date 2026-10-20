@@ -30,9 +30,14 @@ public class CartPage {
         wait.until(ExpectedConditions.urlContains("cart.html"));
     }
 
-    public void checkout() {
-        wait.until(
-            ExpectedConditions.elementToBeClickable(checkoutButton)
-        ).click();
-    }
+   public void checkout() {
+    wait.until(
+        ExpectedConditions.elementToBeClickable(checkoutButton)
+    ).click();
+
+    wait.until(
+        ExpectedConditions.urlContains("checkout-step-one.html")
+    );
+} 
+
 }
